@@ -13,7 +13,7 @@
     rel="stylesheet"
   />
 
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     :root {
@@ -43,7 +43,7 @@
       overflow: hidden;
     }
 
-    button {
+    button, a {
       font-family: inherit;
     }
 
@@ -444,8 +444,16 @@
 
         <div class="mt-6 grid grid-cols-[1.05fr_0.95fr] gap-6 items-stretch">
           <div class="reveal rounded-3xl bg-white/95 border border-slate-200 p-6 shadow-sm">
-            <div class="text-[15px] font-black uppercase tracking-[0.12em] text-slate-500">
-              집회 구호의 교육적 의미
+            
+            <div class="flex items-center justify-between">
+              <div class="text-[15px] font-black uppercase tracking-[0.12em] text-slate-500">
+                집회 구호의 교육적 의미
+              </div>
+              <!-- 사용자가 요청한 링크 추가 부분 -->
+              <a href="http://m.bokuennews.com/m/m_article.html?no=278758" target="_blank" rel="noopener noreferrer" 
+                 class="text-[13px] font-extrabold px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-800 hover:text-white hover:border-slate-800 transition-all shadow-sm flex items-center gap-1 text-decoration-none">
+                관련 기사 보기 ↗
+              </a>
             </div>
 
             <div class="mt-4 grid grid-cols-2 gap-3">
@@ -547,6 +555,7 @@
     const counter = document.getElementById("counter");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // 점(Indicator) 생성
     for (let i = 1; i <= total; i++) {
       const dot = document.createElement("button");
       dot.type = "button";
@@ -593,6 +602,7 @@
       counter.textContent = current + " / " + total;
     }
 
+    // 슬라이드 내 요소 나타나기 애니메이션
     function animateSlide(slide) {
       const items = slide.querySelectorAll(".reveal");
 
@@ -618,6 +628,7 @@
       });
     }
 
+    // 키보드 이벤트
     document.addEventListener("keydown", (event) => {
       const key = event.key;
 
@@ -645,7 +656,8 @@
     let pointerStartX = null;
 
     deck.addEventListener("pointerdown", (event) => {
-      if (event.target.closest(".nav-controls")) return;
+      // a 태그, 버튼 등을 클릭한 경우에는 스와이프를 무시합니다.
+      if (event.target.closest(".nav-controls") || event.target.closest("a")) return;
       pointerStartX = event.clientX;
     });
 
